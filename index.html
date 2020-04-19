@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Zhen&#39;s blog">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-163982775-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'UA-163982775-1');
+    </script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span></span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link active">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link mobile-active">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <main class="app-body">
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/04/19/%E7%94%A8R%E8%AF%AD%E8%A8%80%E5%AE%8C%E6%88%90%E4%B8%80%E4%BB%BD%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E4%BD%9C%E4%B8%9A/">用R语言完成一份数据可视化作业</a>
+      </h2>
+      <p class="article-date">April 19, 2020</p>
+      
+        
+  <a href="/tags#R" >
+    <span class="tag-code">R</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          之前靠着面向搜索引擎编程，用R勉强应付了一些作业。虽然也对R的语法和常用包做过一些整理，但遇到新的数据时还是感觉没有什么头绪。收到新学期作业后发现老师要求提高了，因此打算把就把处理过程按实操顺序整理一下，积累一些数据处理的基本套路。
+后续课程进展中发现许多章节背后都有需要明确的概念、应对方法 ...
+        
+      </div>
+      <a class="more" href="/2020/04/19/%E7%94%A8R%E8%AF%AD%E8%A8%80%E5%AE%8C%E6%88%90%E4%B8%80%E4%BB%BD%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E4%BD%9C%E4%B8%9A/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/04/19/Pyspark_in_context/">Pyspark in Context</a>
+      </h2>
+      <p class="article-date">April 19, 2020</p>
+      
+        
+  <a href="/tags#PySpark" >
+    <span class="tag-code">PySpark</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          
+在熟悉SQL，Python和Shell的基础上可以快速切换到Pyspark SQL。但没有并行系统经验的同学需要注意查询语句的不同写法会带来数十倍的性能差异。
+
+
+
+一份RDD结果在后续使用时提高速度，使用cache或保存成文件
+
+Spark中cache和persist的作用以及存储级别
+
+        
+      </div>
+      <a class="more" href="/2020/04/19/Pyspark_in_context/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/04/19/Bash_in_context/">Bash in Context</a>
+      </h2>
+      <p class="article-date">April 19, 2020</p>
+      
+        
+  <a href="/tags#Bash" >
+    <span class="tag-code">Bash</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          基本的Shell增删改查命令大家比较容易理解，也不容易忘记。但是我们常常遇到一些稍复杂的小任务时还是会觉得一时无从下手。这类稍复杂的小任务有的需要多个命令组合，有时则需要用到一些命令的冷门参数，网上实现方式五花八门，前用后忘是常态。因此现在把当时面临的应用场景也一并记录下来，有时间再补充比较 ...
+        
+      </div>
+      <a class="more" href="/2020/04/19/Bash_in_context/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/04/19/%E8%AF%97%E7%BB%8F%E5%92%8C%E8%B5%B7%E5%90%8D/">中国诗词大会和我们有什么关系</a>
+      </h2>
+      <p class="article-date">April 19, 2020</p>
+      
+        
+  <a href="/tags#诗词" >
+    <span class="tag-code">诗词</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          昨天和小朋友凑热闹一起看了中国诗词大会第二季总决赛，虽然CCTV出品的节目味道总还是怪怪的，但是诗词当年表达的情感是真实和动人的。
+虽然古诗词和现在人赚钱买房没什么关系，不过今天发现古诗词里优美的文字用来起名字是非常好的，还有一套起名字的方法论
+
+女诗经，男楚辞，文论语，武周易
+
+我们发现不 ...
+        
+      </div>
+      <a class="more" href="/2020/04/19/%E8%AF%97%E7%BB%8F%E5%92%8C%E8%B5%B7%E5%90%8D/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/04/19/R_in_context/">R in Context</a>
+      </h2>
+      <p class="article-date">April 19, 2020</p>
+      
+        
+  <a href="/tags#R" >
+    <span class="tag-code">R</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          
+The variety of R syntaxes give you many ways to “say” the same thing.
+
+R语言存在多种Syntax，最为常用的是base R (dollar sign), tidyverse和formula syntax，实际使用中经常 ...
+        
+      </div>
+      <a class="more" href="/2020/04/19/R_in_context/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/04/19/%E7%BB%99%E5%A8%83%E8%AF%BB%E7%BB%98%E6%9C%AC%E7%9A%84%E4%B8%80%E7%82%B9%E6%94%B6%E8%8E%B7/">给娃读绘本的一点收获</a>
+      </h2>
+      <p class="article-date">April 19, 2020</p>
+      
+        
+  <a href="/tags#语言" >
+    <span class="tag-code">语言</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          利用假期学了一些英语介词的用法，所以最近特别留意各种文章中介词的用法和含义。而且，似乎有的作者特别喜欢用介词来替代一些大词，一样可以把意思表达清楚，这种文笔似乎特别适合通俗读物和街头小报～～
+正规一点来讲，“介词”是虚词，常常用来表达“位置、方向、状态”，一般不能单独使用，以前我总是把动词+ ...
+        
+      </div>
+      <a class="more" href="/2020/04/19/%E7%BB%99%E5%A8%83%E8%AF%BB%E7%BB%98%E6%9C%AC%E7%9A%84%E4%B8%80%E7%82%B9%E6%94%B6%E8%8E%B7/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2020/04/19/hello-world/">Hello World</a>
+      </h2>
+      <p class="article-date">April 19, 2020</p>
+      
+      <div class="article-summary">
+        
+          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer ...
+        
+      </div>
+      <a class="more" href="/2020/04/19/hello-world/">Read more</a>
+    </article>
+  
+
+  
+</main>
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2020 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+
+<script src="/js/script.js"></script>
+
+  </body>
+</html>

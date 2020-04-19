@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Zhen&#39;s blog">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      用R语言完成一份数据可视化作业 | 
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-163982775-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'UA-163982775-1');
+    </script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span></span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>用R语言完成一份数据可视化作业</h2>
+  <p class="post-date">2020-04-19</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>之前靠着面向搜索引擎编程，用R勉强应付了一些作业。虽然也对R的语法和常用包做过一些整理，但遇到新的数据时还是感觉没有什么头绪。收到新学期作业后发现老师要求提高了，因此打算把就把处理过程按实操顺序整理一下，积累一些数据处理的基本套路。</p>
+<p>后续课程进展中发现许多章节背后都有需要明确的概念、应对方法和样本处理方法和统计方法。因此过于草率的在这里概括，不如留下一个扩展链接，方便日后查询。</p>
+<ol>
+<li>The <strong>questions</strong> being asked about the data is the trace you can follow in your analysis.</li>
+<li>Check data in the background before we move on for more visualization</li>
+<li>Alway show your <strong>Raw Data</strong> to your reader</li>
+</ol>
+<p>use “PackageName::function_name” to reduce ambiguous, to show the exact function</p>
+<ol start="4">
+<li>When data size is large, you can’t explore every row just by a glance, now you need these method to guide your task.</li>
+</ol>
+<h2 id="Import-Data"><a href="#Import-Data" class="headerlink" title="Import Data"></a>Import Data</h2><p>Load the csv file using something like</p>
+<p>原生与readr (属于tidyverse系列)</p>
+<p>常用的参数</p>
+<h2 id="Understand-Data-structure"><a href="#Understand-Data-structure" class="headerlink" title="Understand Data structure"></a>Understand Data structure</h2><h3 id="summary-or-a-glimpse"><a href="#summary-or-a-glimpse" class="headerlink" title="summary or a glimpse"></a>summary or a glimpse</h3><p>Provide some summary statistics about the data set. <strong>summary()</strong> or <strong>tibble::glimpse()</strong></p>
+<p>![image-20200226091122857](/Users/neil/Library/Application Support/typora-user-images/image-20200226091122857.png)</p>
+<p>data.frame vs tibble</p>
+<p>直接my_tb</p>
+<p>str()</p>
+<p>summary()</p>
+<p>glimpse()</p>
+<p>skimr::skim()</p>
+<p>hist for numeric data, odd?</p>
+<p>Association/Correlation to Pairs Plot, talk more further</p>
+<p>we can build our own visualization</p>
+<h3 id="Data-roles"><a href="#Data-roles" class="headerlink" title="Data roles"></a>Data roles</h3><p>columns’ meaning?</p>
+<h2 id="The-problem-of-data"><a href="#The-problem-of-data" class="headerlink" title="The problem of data"></a>The problem of data</h2><h3 id="Missing-Data"><a href="#Missing-Data" class="headerlink" title="Missing Data"></a>Missing Data</h3><ul>
+<li>Are there missing values?</li>
+<li>Is there a pattern to the missing values.<ul>
+<li>mostly missing(50%,60% or 80% no standard, base on questions), and you can’t throw away</li>
+</ul>
+</li>
+<li>Are there variables that are almost totally missing?</li>
+<li>Are there observations that are almost totally missing?</li>
+</ul>
+<p>vis_miss # You can easily cluster by obs, and don’t forget to sort variable</p>
+<p>vis_dat</p>
+<p>colMeans(is.na(d))</p>
+<p>Cluster your missingness to give a better understand of </p>
+<p>Novelty variables</p>
+<h3 id="Correlation"><a href="#Correlation" class="headerlink" title="Correlation"></a>Correlation</h3><h4 id="for-category-norminal-data"><a href="#for-category-norminal-data" class="headerlink" title="for category/norminal data"></a>for category/norminal data</h4><h5 id="mosaic"><a href="#mosaic" class="headerlink" title="mosaic"></a>mosaic</h5><p>show category data, table()See counts of values.su</p>
+<p>give a chance to your reader to handle the </p>
+<h4 id="for-numeric-data"><a href="#for-numeric-data" class="headerlink" title="for numeric data"></a>for numeric data</h4><h5 id="Pairs-Plot"><a href="#Pairs-Plot" class="headerlink" title="Pairs Plot"></a>Pairs Plot</h5><p>to explore the correlations</p>
+<p>Pairs Plot can show categorical data</p>
+<h5 id="Corrgram"><a href="#Corrgram" class="headerlink" title="Corrgram"></a>Corrgram</h5><p>![image-20200301201738547](/Users/neil/Library/Application Support/typora-user-images/image-20200301201738547.png)</p>
+<p>order is just order, doesn’t change the correlation</p>
+<p>style of calculation is more critical, the spearman can overcome the effect by outliers, so spearman introduce a different groups.</p>
+<h5 id="boxplot"><a href="#boxplot" class="headerlink" title="boxplot"></a>boxplot</h5><p>might be outliers/novels, doesn’t prove anything, that some point could be a outlier</p>
+<p>we could standardized to read all </p>
+<p>IQR multiplier (only for normally distributed), so try to provide a widget to your readers</p>
+<h3 id="Techniques-for-data-outliers"><a href="#Techniques-for-data-outliers" class="headerlink" title="Techniques for data outliers"></a><strong>Techniques for data outliers</strong></h3><h5 id="Scatter-plot"><a href="#Scatter-plot" class="headerlink" title="Scatter plot"></a>Scatter plot</h5><p>plot</p>
+<h4 id="Continuity"><a href="#Continuity" class="headerlink" title="Continuity"></a>Continuity</h4><p>rising order chart keep scale and center to the reader, to see the real data if they want to.</p>
+<p>data can be explained</p>
+<h3 id="Problems-with-nominals"><a href="#Problems-with-nominals" class="headerlink" title="Problems with nominals"></a>Problems with nominals</h3><p>Class imbalance</p>
+<h2 id="Why-do-visualisation"><a href="#Why-do-visualisation" class="headerlink" title="Why do visualisation"></a>Why do visualisation</h2><p>Human brain is a magic, strong machine, for example we can identify a linear regression pattern when we see a scatter plot</p>
+<h4 id="Interaction"><a href="#Interaction" class="headerlink" title="Interaction"></a>Interaction</h4><p>reactive in Shiny</p>
+<p>ggploty</p>
+<p>any dataset can be melted</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">require(reshape2, quietly &#x3D; TRUE)</span><br><span class="line">require(alluvial, quietly &#x3D; TRUE)</span><br><span class="line">melted &lt;- melt(cm$table)</span><br><span class="line">melted$colour &#x3D; ifelse(melted$Prediction &#x3D;&#x3D; melted$Reference, &quot;green&quot;, &quot;red&quot;)</span><br><span class="line">par(mar &#x3D; c(0,0,1,0))</span><br><span class="line">alluvial::alluvial(</span><br><span class="line">  melted[,1:2],</span><br><span class="line">  freq &#x3D; melted$value,</span><br><span class="line">  col &#x3D; melted$colour,</span><br><span class="line">  alpha &#x3D; 0.5,</span><br><span class="line">  hide &#x3D; melted$value &#x3D;&#x3D; 0</span><br><span class="line">)</span><br><span class="line">mtext(&quot;Classification results&quot;, font &#x3D; 2)</span><br></pre></td></tr></table></figure>
+
+<h4 id="Shiny"><a href="#Shiny" class="headerlink" title="Shiny"></a>Shiny</h4><p>poor debug, so do it in  small step and run, small changes and test</p>
+<p>set a  breakpoint or browser(), in the current version of Rstudio they are implement as same, so we can easily use a breakpoint to debug.</p>
+<p>react log can offer a visualised graph</p>
+<h2 id="Feature-selection-engineer-Dimensionality"><a href="#Feature-selection-engineer-Dimensionality" class="headerlink" title="Feature selection/engineer (Dimensionality)"></a>Feature selection/engineer (Dimensionality)</h2><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://www.pluralsight.com/guides/exploring-data-set-r" target="_blank" rel="noopener">Exploring your First Data Set with R</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/29891963" target="_blank" rel="noopener">R语言学习笔记：数据类型与存储</a></p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#R" >
+    <span class="tag-code">R</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2020/04/19/Pyspark_in_context/">
+        <span class="nav-arrow">← </span>
+        
+          Pyspark in Context
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- Disqus START -->
+      <div id="disqus_thread"></div>
+      <!-- Disqus END -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Import-Data"><span class="toc-nav-text">Import Data</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Understand-Data-structure"><span class="toc-nav-text">Understand Data structure</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#summary-or-a-glimpse"><span class="toc-nav-text">summary or a glimpse</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Data-roles"><span class="toc-nav-text">Data roles</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#The-problem-of-data"><span class="toc-nav-text">The problem of data</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Missing-Data"><span class="toc-nav-text">Missing Data</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Correlation"><span class="toc-nav-text">Correlation</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#for-category-norminal-data"><span class="toc-nav-text">for category&#x2F;norminal data</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#mosaic"><span class="toc-nav-text">mosaic</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#for-numeric-data"><span class="toc-nav-text">for numeric data</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#Pairs-Plot"><span class="toc-nav-text">Pairs Plot</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#Corrgram"><span class="toc-nav-text">Corrgram</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#boxplot"><span class="toc-nav-text">boxplot</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Techniques-for-data-outliers"><span class="toc-nav-text">Techniques for data outliers</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#Scatter-plot"><span class="toc-nav-text">Scatter plot</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Continuity"><span class="toc-nav-text">Continuity</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Problems-with-nominals"><span class="toc-nav-text">Problems with nominals</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Why-do-visualisation"><span class="toc-nav-text">Why do visualisation</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Interaction"><span class="toc-nav-text">Interaction</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#Shiny"><span class="toc-nav-text">Shiny</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Feature-selection-engineer-Dimensionality"><span class="toc-nav-text">Feature selection&#x2F;engineer (Dimensionality)</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Reference"><span class="toc-nav-text">Reference</span></a>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://yoursite.com/2020/04/19/用R语言完成一份数据可视化作业/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+
+
+
+
+
+  <script>
+    var disqus_shortname = 'monster7';
+    
+    var disqus_url = 'http://yoursite.com/2020/04/19/%E7%94%A8R%E8%AF%AD%E8%A8%80%E5%AE%8C%E6%88%90%E4%B8%80%E4%BB%BD%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E4%BD%9C%E4%B8%9A/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//go.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2020 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+
+<script src="/js/script.js"></script>
+
+  </body>
+</html>

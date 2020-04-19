@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Zhen&#39;s blog">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      R in Context | 
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-163982775-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'UA-163982775-1');
+    </script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span></span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>R in Context</h2>
+  <p class="post-date">2020-04-19</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><blockquote>
+<p>The variety of R syntaxes give you many ways to “say” the same thing.</p>
+</blockquote>
+<p>R语言存在多种Syntax，最为常用的是base R (dollar sign), tidyverse和formula syntax，实际使用中经常出现不同Syntax混用的情况，对学习造成了一定困扰。因此除了应用场景，我也会注意Syntax的使用。</p>
+<hr>
+<h2 id="Dataframe"><a href="#Dataframe" class="headerlink" title="Dataframe"></a>Dataframe</h2><h3 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h3><h4 id="查询和提取"><a href="#查询和提取" class="headerlink" title="查询和提取"></a>查询和提取</h4><ol>
+<li>datafram和tibble在提取列的时后使用<code>tt[,&#39;age&#39;]</code>有区别（不兼容，应避免使用）。这些语法也可以推广到list</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>data.frame</th>
+<th>tibble</th>
+<th>list</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>tt$age</code></td>
+<td>vector</td>
+<td>vector</td>
+<td>list</td>
+</tr>
+<tr>
+<td><code>tt[&#39;age&#39;]</code></td>
+<td>data.frame 1 column</td>
+<td>tibble 1 column</td>
+<td>list</td>
+</tr>
+<tr>
+<td><code>tt[,&#39;age&#39;]</code></td>
+<td><strong>vector</strong></td>
+<td><strong>tibble 1 column</strong></td>
+<td>无效</td>
+</tr>
+<tr>
+<td><code>tt[[&#39;age&#39;]]</code></td>
+<td>vector</td>
+<td>vector</td>
+<td>vector</td>
+</tr>
+</tbody></table>
+<ol start="2">
+<li>datafram和tibble在使用逻辑下标时，datafram可以使用matrix，而tibble则会抛错，相比之下tibble的语法更统一了</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>data.frame</th>
+<th>tibble</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>tt[tt$age&gt;15,]</code></td>
+<td>OK</td>
+<td>OK</td>
+</tr>
+<tr>
+<td><code>tt[tt[&#39;age&#39;]&gt;15]</code></td>
+<td>OK</td>
+<td>NO</td>
+</tr>
+<tr>
+<td><code>tt[tt[&#39;age&#39;]&gt;15,]</code></td>
+<td>OK</td>
+<td>OK</td>
+</tr>
+<tr>
+<td><code>tt[tt[,&#39;age&#39;]&gt;15,]</code></td>
+<td>OK</td>
+<td>OK</td>
+</tr>
+<tr>
+<td><code>tt[tt[[&#39;age&#39;]]&gt;15,]</code></td>
+<td>Ok</td>
+<td>OK</td>
+</tr>
+<tr>
+<td><code>tt[which(tt$age&gt;15),]</code></td>
+<td>OK</td>
+<td>OK</td>
+</tr>
+</tbody></table>
+<p>参考资料<a href="http://www.math.pku.edu.cn/teachers/lidf/docs/Rbook/html/_Rbook/prog-type-index.html" target="_blank" rel="noopener">7 R向量下标和子集</a></p>
+<h4 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h4><ol>
+<li>窗口函数的使用：累计降水和累计均值</li>
+</ol>
+<p><a href="https://cloud.tencent.com/developer/article/1430576" target="_blank" rel="noopener">巧用R语言中各类聚合窗口函数</a></p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">prcp &lt;- prcp %&gt;% group_by(COUNTRY_NAME) %&gt;% </span><br><span class="line">  mutate(</span><br><span class="line">    CMEAN_PRCP = order_by(YEAR, cummean(AVG_PRCP)),</span><br><span class="line">    CSUM_PRCP = order_by(YEAR, cumsum(AVG_PRCP))</span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="更新值"><a href="#更新值" class="headerlink" title="更新值"></a>更新值</h4><ol>
+<li>更新一列中部分值</li>
+</ol>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">prcp$COUNTRY_NAME[prcp$COUNTRY_NAME==<span class="string">"Bahamas, The"</span>] &lt;- <span class="string">"Bahamas"</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><h3 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h3><h4 id="变量转换"><a href="#变量转换" class="headerlink" title="变量转换"></a>变量转换</h4><ol>
+<li>将shiny widget的input变量作为对象(值或是字符串代表的对象)</li>
+</ol>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># 第一个widget，选择项的值是字符串，但后续要用做dataframe的列名</span></span><br><span class="line">radioButtons(<span class="string">"cmethod"</span>, label=(<span class="string">"Choose a method"</span>), choices = list(<span class="string">"Cumulative Average"</span> = <span class="string">"CMEAN_PRCP"</span>, <span class="string">"Cumulative Sum"</span> = <span class="string">"CSUM_PRCP"</span>), selected = <span class="string">"CMEAN_PRCP"</span>)</span><br><span class="line"><span class="comment"># 第二个widget，slider选择的是年份，值是整数</span></span><br><span class="line">sliderInput(<span class="string">"syear"</span>, label = (<span class="string">"Years Range"</span>), min = <span class="number">1764</span>, max = <span class="number">2020</span>, value = c(<span class="number">1764</span>,<span class="number">2020</span>))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Server中的funciton</span></span><br><span class="line">prcp_year &lt;- prcp %&gt;% </span><br><span class="line">	filter(YEAR&gt;=input$syear[<span class="number">1</span>],YEAR&lt;=input$syear[<span class="number">2</span>]) %&gt;% <span class="comment"># 直接使用widget传入的值</span></span><br><span class="line">  group_by(COUNTRY_NAME) %&gt;% </span><br><span class="line">  mutate(</span><br><span class="line">    LAST_PRCP = last(</span><br><span class="line">      eval(parse(text = input$cmethod)), <span class="comment"># 不能直接使用widget传入的值，需要首先使用parse函数将字符串转化为表达式(expression)，而后使用eval()函数对表达式求解</span></span><br><span class="line">      order_by = YEAR)</span><br><span class="line">  			) %&gt;% </span><br><span class="line">	select(COUNTRY_NAME, LAST_PRCP) %&gt;% distinct()</span><br></pre></td></tr></table></figure>
+
+<p>以下两篇文章解释的更全面，eval(parse(text = ))的方来来自于第二篇</p>
+<p><a href="https://zhuanlan.zhihu.com/p/30383865" target="_blank" rel="noopener">变量名称和字符串的转换</a></p>
+<p><a href="https://cran.r-project.org/doc/contrib/Liu-FAQ.pdf" target="_blank" rel="noopener">如何将字符串转变为命令􏰉行?</a></p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#R" >
+    <span class="tag-code">R</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2020/04/19/%E7%BB%99%E5%A8%83%E8%AF%BB%E7%BB%98%E6%9C%AC%E7%9A%84%E4%B8%80%E7%82%B9%E6%94%B6%E8%8E%B7/">
+        <span class="nav-arrow">← </span>
+        
+          给娃读绘本的一点收获
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2020/04/19/%E8%AF%97%E7%BB%8F%E5%92%8C%E8%B5%B7%E5%90%8D/">
+        
+          中国诗词大会和我们有什么关系
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- Disqus START -->
+      <div id="disqus_thread"></div>
+      <!-- Disqus END -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Dataframe"><span class="toc-nav-text">Dataframe</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#数据"><span class="toc-nav-text">数据</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#查询和提取"><span class="toc-nav-text">查询和提取</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#聚合"><span class="toc-nav-text">聚合</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#更新值"><span class="toc-nav-text">更新值</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#变量"><span class="toc-nav-text">变量</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#类型"><span class="toc-nav-text">类型</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#变量转换"><span class="toc-nav-text">变量转换</span></a></li></ol></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://yoursite.com/2020/04/19/R_in_context/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+
+
+
+
+
+  <script>
+    var disqus_shortname = 'monster7';
+    
+    var disqus_url = 'http://yoursite.com/2020/04/19/R_in_context/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//go.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2020 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng" target="_blank" rel="noopener">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+
+<script src="/js/script.js"></script>
+
+  </body>
+</html>
