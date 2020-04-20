@@ -10,7 +10,7 @@
   
   <title>
     
-      Pyspark in Context | 
+      Bash in Context | 
     
   </title>
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -154,8 +154,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>Pyspark in Context</h2>
-  <p class="post-date">2020-04-19</p>
+  <h2>Bash in Context</h2>
+  <p class="post-date">2020-03-01</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -163,22 +163,20 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><blockquote>
-<p>在熟悉SQL，Python和Shell的基础上可以快速切换到Pyspark SQL。但没有并行系统经验的同学需要注意查询语句的不同写法会带来数十倍的性能差异。</p>
-</blockquote>
+    <section class="markdown-content"><p>基本的Shell增删改查命令大家比较容易理解，也不容易忘记。但是我们常常遇到一些稍复杂的小任务时还是会觉得一时无从下手。这类稍复杂的小任务有的需要多个命令组合，有时则需要用到一些命令的冷门参数，网上实现方式五花八门，前用后忘是常态。因此现在把当时面临的应用场景也一并记录下来，有时间再补充比较不同方法的优缺点。然后综合语法的可读性、命令的性能以及尽量使用主流命令的原则来取舍，便于理解、记忆和日后速查。</p>
 <hr>
-<ol>
-<li>一份RDD结果在后续使用时提高速度，使用cache或保存成文件</li>
-</ol>
-<p><a href="https://blog.csdn.net/qq_20641565/article/details/76216417" target="_blank" rel="noopener">Spark中cache和persist的作用以及存储级别</a></p>
+<h4 id="文件增删改查"><a href="#文件增删改查" class="headerlink" title="文件增删改查"></a>文件增删改查</h4><p>任务1：只把当前目录下所有的文件移动到./ex2/下，不移动当前目录中的其他目录（只移动普通文件）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">find .&#x2F; -maxdepth 1 -type f | xargs -i -t mv &#123;&#125; .&#x2F;ex2&#x2F;</span><br><span class="line"># -maxdepth 1 限制查找深度在当前目录，默认会把子目录中的文件也找出来</span><br><span class="line"># -type f 查找类型是普通文件，这个参数是本任务的关键</span><br><span class="line"># xargs -i 管道符前的输出会被逐项输出 -t 将后续命令输出后再执行，可以检查语法</span><br><span class="line"># &#123;&#125; xargs的优势是可以执行参数的位置，如果是|管道符就只能当作后续命令的输入</span><br><span class="line"># 补充：-exec和xargs比较近似，以后尽量使用xargs</span><br></pre></td></tr></table></figure>
+
+
 </section>
     <!-- Tags START -->
     
       <div class="tags">
         <span>Tags:</span>
         
-  <a href="/tags#PySpark" >
-    <span class="tag-code">PySpark</span>
+  <a href="/tags#Bash" >
+    <span class="tag-code">Bash</span>
   </a>
 
       </div>
@@ -189,17 +187,17 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2020/04/19/Bash_in_context/">
+      <a class="nav-left" href="/2020/03/01/%E7%94%A8R%E8%AF%AD%E8%A8%80%E5%AE%8C%E6%88%90%E4%B8%80%E4%BB%BD%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E4%BD%9C%E4%B8%9A/">
         <span class="nav-arrow">← </span>
         
-          Bash in Context
+          用R语言完成一份数据可视化作业
         
       </a>
     
     
-      <a class="nav-right" href="/2020/04/19/%E7%94%A8R%E8%AF%AD%E8%A8%80%E5%AE%8C%E6%88%90%E4%B8%80%E4%BB%BD%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E4%BD%9C%E4%B8%9A/">
+      <a class="nav-right" href="/2020/04/01/Pyspark_in_context/">
         
-          用R语言完成一份数据可视化作业
+          Pyspark in Context
         
         <span class="nav-arrow"> →</span>
       </a>
@@ -231,7 +229,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="nav">none</ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#文件增删改查"><span class="toc-nav-text">文件增删改查</span></a></li></ol>
     
   </div>
 </aside>
@@ -241,7 +239,7 @@
 
 <script>
   (function () {
-    var url = 'http://yoursite.com/2020/04/19/Pyspark_in_context/';
+    var url = 'http://yoursite.com/2020/03/01/Bash_in_context/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
@@ -304,7 +302,7 @@
   <script>
     var disqus_shortname = 'monster7';
     
-    var disqus_url = 'http://yoursite.com/2020/04/19/Pyspark_in_context/';
+    var disqus_url = 'http://yoursite.com/2020/03/01/Bash_in_context/';
     
     (function(){
       var dsq = document.createElement('script');

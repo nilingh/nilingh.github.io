@@ -10,7 +10,7 @@
   
   <title>
     
-      中国诗词大会和我们有什么关系 | 
+      R in Context | 
     
   </title>
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -154,8 +154,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>中国诗词大会和我们有什么关系</h2>
-  <p class="post-date">2017-01-01</p>
+  <h2>R in Context</h2>
+  <p class="post-date">2020-04-01</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -163,49 +163,123 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><p>昨天和小朋友凑热闹一起看了<a href="http://tv.cctv.com/2017/02/07/VIDEuQoQ3zHwfCvPXVrBc4qN170207.shtml" target="_blank" rel="noopener">中国诗词大会第二季总决赛</a>，虽然CCTV出品的节目味道总还是怪怪的，但是诗词当年表达的情感是真实和动人的。</p>
-<p>虽然古诗词和现在人赚钱买房没什么关系，不过今天发现古诗词里优美的文字用来起名字是非常好的，还有一套起名字的方法论</p>
-<blockquote>
-<p>女诗经，男楚辞，文论语，武周易</p>
+    <section class="markdown-content"><blockquote>
+<p>The variety of R syntaxes give you many ways to “say” the same thing.</p>
 </blockquote>
-<p>我们发现不少名人的名字就出自<a href="http://www.gushiwen.org/guwen/shijing.aspx" target="_blank" rel="noopener">诗经</a>，比如屠呦呦就出自<a href="http://so.gushiwen.org/view_159.aspx" target="_blank" rel="noopener">小雅·鹿鸣</a>，不少网友都反映 <strong>呦呦鹿鸣，食野之蒿</strong> 简直就是预言</p>
-<blockquote>
-<p>呦呦鹿鸣，食野之苹。我有嘉宾，鼓瑟吹笙。吹笙鼓簧，承筐是将。人之好我，示我周行。</p>
-</blockquote>
-<p>还有一些我们熟知的名字</p>
-<blockquote>
-<p>憬彼淮夷，来献其琛。——钱其琛</p>
-</blockquote>
-<blockquote>
-<p>今我来思，雨雪霏霏。 ——黄雪霏</p>
-</blockquote>
-<blockquote>
-<p>鹤鸣于九皋，声闻于天。——张闻天</p>
-</blockquote>
-<blockquote>
-<p>王国克生，维周之桢。——王国维</p>
-</blockquote>
-<blockquote>
-<p>济济多士，文王以宁。——厉以宁</p>
-</blockquote>
-<p>才子佳人梁思成和林徽因</p>
-<p><img src="http://img1.gtimg.com/cul/pics/hv1/211/247/1966/127902346.jpg" alt=""></p>
-<blockquote>
-<p>大姒嗣徽音，则百斯男。</p>
-</blockquote>
-<blockquote>
-<p>汤孙奏假，绥我思成。</p>
-</blockquote>
-<p>诸位以后有小孩或者二宝的时候可以试一下</p>
-<p>古诗词中巧妙的文字组合运用本身还体现出一种美感，通俗的说阅读这样的文字会给人快感，就像阅读一段优美简洁的代码或观看篮球比赛中精彩的进球一样。或许欣赏人类智慧结晶的过程就是美的享受吧，等以后读到美学书籍的时候验证一下这个看法。</p>
+<p>R语言存在多种Syntax，最为常用的是base R (dollar sign), tidyverse和formula syntax，实际使用中经常出现不同Syntax混用的情况，对学习造成了一定困扰。因此除了应用场景，我也会注意Syntax的使用。</p>
+<hr>
+<h2 id="Dataframe"><a href="#Dataframe" class="headerlink" title="Dataframe"></a>Dataframe</h2><h3 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h3><h4 id="查询和提取"><a href="#查询和提取" class="headerlink" title="查询和提取"></a>查询和提取</h4><ol>
+<li>datafram和tibble在提取列的时后使用<code>tt[,&#39;age&#39;]</code>有区别（不兼容，应避免使用）。这些语法也可以推广到list</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>data.frame</th>
+<th>tibble</th>
+<th>list</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>tt$age</code></td>
+<td>vector</td>
+<td>vector</td>
+<td>list</td>
+</tr>
+<tr>
+<td><code>tt[&#39;age&#39;]</code></td>
+<td>data.frame 1 column</td>
+<td>tibble 1 column</td>
+<td>list</td>
+</tr>
+<tr>
+<td><code>tt[,&#39;age&#39;]</code></td>
+<td><strong>vector</strong></td>
+<td><strong>tibble 1 column</strong></td>
+<td>无效</td>
+</tr>
+<tr>
+<td><code>tt[[&#39;age&#39;]]</code></td>
+<td>vector</td>
+<td>vector</td>
+<td>vector</td>
+</tr>
+</tbody></table>
+<ol start="2">
+<li>datafram和tibble在使用逻辑下标时，datafram可以使用matrix，而tibble则会抛错，相比之下tibble的语法更统一了</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>data.frame</th>
+<th>tibble</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>tt[tt$age&gt;15,]</code></td>
+<td>OK</td>
+<td>OK</td>
+</tr>
+<tr>
+<td><code>tt[tt[&#39;age&#39;]&gt;15]</code></td>
+<td>OK</td>
+<td>NO</td>
+</tr>
+<tr>
+<td><code>tt[tt[&#39;age&#39;]&gt;15,]</code></td>
+<td>OK</td>
+<td>OK</td>
+</tr>
+<tr>
+<td><code>tt[tt[,&#39;age&#39;]&gt;15,]</code></td>
+<td>OK</td>
+<td>OK</td>
+</tr>
+<tr>
+<td><code>tt[tt[[&#39;age&#39;]]&gt;15,]</code></td>
+<td>Ok</td>
+<td>OK</td>
+</tr>
+<tr>
+<td><code>tt[which(tt$age&gt;15),]</code></td>
+<td>OK</td>
+<td>OK</td>
+</tr>
+</tbody></table>
+<p>参考资料<a href="http://www.math.pku.edu.cn/teachers/lidf/docs/Rbook/html/_Rbook/prog-type-index.html" target="_blank" rel="noopener">7 R向量下标和子集</a></p>
+<h4 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h4><ol>
+<li>窗口函数的使用：累计降水和累计均值</li>
+</ol>
+<p><a href="https://cloud.tencent.com/developer/article/1430576" target="_blank" rel="noopener">巧用R语言中各类聚合窗口函数</a></p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">prcp &lt;- prcp %&gt;% group_by(COUNTRY_NAME) %&gt;% </span><br><span class="line">  mutate(</span><br><span class="line">    CMEAN_PRCP = order_by(YEAR, cummean(AVG_PRCP)),</span><br><span class="line">    CSUM_PRCP = order_by(YEAR, cumsum(AVG_PRCP))</span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="更新值"><a href="#更新值" class="headerlink" title="更新值"></a>更新值</h4><ol>
+<li>更新一列中部分值</li>
+</ol>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">prcp$COUNTRY_NAME[prcp$COUNTRY_NAME==<span class="string">"Bahamas, The"</span>] &lt;- <span class="string">"Bahamas"</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><h3 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h3><h4 id="变量转换"><a href="#变量转换" class="headerlink" title="变量转换"></a>变量转换</h4><ol>
+<li>将shiny widget的input变量作为对象(值或是字符串代表的对象)</li>
+</ol>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># 第一个widget，选择项的值是字符串，但后续要用做dataframe的列名</span></span><br><span class="line">radioButtons(<span class="string">"cmethod"</span>, label=(<span class="string">"Choose a method"</span>), choices = list(<span class="string">"Cumulative Average"</span> = <span class="string">"CMEAN_PRCP"</span>, <span class="string">"Cumulative Sum"</span> = <span class="string">"CSUM_PRCP"</span>), selected = <span class="string">"CMEAN_PRCP"</span>)</span><br><span class="line"><span class="comment"># 第二个widget，slider选择的是年份，值是整数</span></span><br><span class="line">sliderInput(<span class="string">"syear"</span>, label = (<span class="string">"Years Range"</span>), min = <span class="number">1764</span>, max = <span class="number">2020</span>, value = c(<span class="number">1764</span>,<span class="number">2020</span>))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Server中的funciton</span></span><br><span class="line">prcp_year &lt;- prcp %&gt;% </span><br><span class="line">	filter(YEAR&gt;=input$syear[<span class="number">1</span>],YEAR&lt;=input$syear[<span class="number">2</span>]) %&gt;% <span class="comment"># 直接使用widget传入的值</span></span><br><span class="line">  group_by(COUNTRY_NAME) %&gt;% </span><br><span class="line">  mutate(</span><br><span class="line">    LAST_PRCP = last(</span><br><span class="line">      eval(parse(text = input$cmethod)), <span class="comment"># 不能直接使用widget传入的值，需要首先使用parse函数将字符串转化为表达式(expression)，而后使用eval()函数对表达式求解</span></span><br><span class="line">      order_by = YEAR)</span><br><span class="line">  			) %&gt;% </span><br><span class="line">	select(COUNTRY_NAME, LAST_PRCP) %&gt;% distinct()</span><br></pre></td></tr></table></figure>
+
+<p>以下两篇文章解释的更全面，eval(parse(text = ))的方来来自于第二篇</p>
+<p><a href="https://zhuanlan.zhihu.com/p/30383865" target="_blank" rel="noopener">变量名称和字符串的转换</a></p>
+<p><a href="https://cran.r-project.org/doc/contrib/Liu-FAQ.pdf" target="_blank" rel="noopener">如何将字符串转变为命令􏰉行?</a></p>
 </section>
     <!-- Tags START -->
     
       <div class="tags">
         <span>Tags:</span>
         
-  <a href="/tags#诗词" >
-    <span class="tag-code">诗词</span>
+  <a href="/tags#R" >
+    <span class="tag-code">R</span>
   </a>
 
       </div>
@@ -216,10 +290,17 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-    
-      <a class="nav-right" href="/2020/02/14/%E7%BB%99%E5%A8%83%E8%AF%BB%E7%BB%98%E6%9C%AC%E7%9A%84%E4%B8%80%E7%82%B9%E6%94%B6%E8%8E%B7/">
+      <a class="nav-left" href="/2020/04/01/Pyspark_in_context/">
+        <span class="nav-arrow">← </span>
         
-          给娃读绘本的一点收获
+          Pyspark in Context
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2020/04/20/%E6%88%91%E7%9A%84%E5%B8%88%E6%89%BF%20%E2%80%94%E2%80%94%E3%80%8A%E4%B8%87%E5%AF%BF%E5%AF%BA%E3%80%8B%E5%BA%8F/">
+        
+          我的师承 ——《万寿寺》序
         
         <span class="nav-arrow"> →</span>
       </a>
@@ -251,7 +332,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="nav">none</ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Dataframe"><span class="toc-nav-text">Dataframe</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#数据"><span class="toc-nav-text">数据</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#查询和提取"><span class="toc-nav-text">查询和提取</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#聚合"><span class="toc-nav-text">聚合</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#更新值"><span class="toc-nav-text">更新值</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#变量"><span class="toc-nav-text">变量</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#类型"><span class="toc-nav-text">类型</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#变量转换"><span class="toc-nav-text">变量转换</span></a></li></ol></li></ol></li></ol>
     
   </div>
 </aside>
@@ -261,7 +342,7 @@
 
 <script>
   (function () {
-    var url = 'http://yoursite.com/2017/01/01/诗经和起名/';
+    var url = 'http://yoursite.com/2020/04/01/R_in_context/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
@@ -324,7 +405,7 @@
   <script>
     var disqus_shortname = 'monster7';
     
-    var disqus_url = 'http://yoursite.com/2017/01/01/%E8%AF%97%E7%BB%8F%E5%92%8C%E8%B5%B7%E5%90%8D/';
+    var disqus_url = 'http://yoursite.com/2020/04/01/R_in_context/';
     
     (function(){
       var dsq = document.createElement('script');
